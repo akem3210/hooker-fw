@@ -1,0 +1,5 @@
+
+Make regexp works for APPNAME
+When a new incomming permission kicks in, check to see if
+    appname match a regex(in appnames that we already have), then
+    if yes record it, in that section.

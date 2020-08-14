@@ -1,0 +1,11 @@
+ATTENTION
+
+LD_PRELOAD=./hooker.so nc google.com 80
+
+avec cette commande netcat arrive a ouvrir une connection vers l'hote????
+tester si il arrive également quand la library est installé...
+Test plus recent, netcat est filtré egalement pourtant, a reverifier.
+
+-----
+Les ping passent également(ICMP) mais c'est assez normal je pense
+car on s'occupe uniquement du syscall connect

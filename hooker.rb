@@ -163,7 +163,9 @@ def regexTestRule(regexString, testString)
 		r[0] = ""
 		r[r.size - 1] = ""
 		begin
+#			_log("regexTestRule() testing #{r} to #{testString}")
 			if (testString =~ /#{r}/) then
+#				_log("regexTestRule() match! testing #{r} to #{testString}")
 				return true
 			end
 		rescue
@@ -178,7 +180,23 @@ end
 # trust == -1 to ignore trust value check(rule testing): see testRuleMatching()
 def hasRule(app = "/.*/", trust = "-1", action = "/.*/", ip = "/.*/", port = "/.*/", family = "/.*/", protocol = "/.*/", strict = false)
 	0.upto($R_APPNAME.size() - 1){ |appID|
-		if ( ($R_APPNAME[appID] == app) or ((regexTestRule($R_APPNAME[appID], app) == true) and (strict == false)) ) then
+#		_log("hasRule() testing appname: #{$R_APPNAME[appID]}")
+
+		appNameMatch = false
+		if($R_APPNAME[appID] == app) then
+			appNameMatch = true
+		else
+			if(regexTestRule($R_APPNAME[appID], app) == true) then
+				if(strict == false) then
+					appNameMatch = true
+				end
+			end
+		end
+
+		
+		if(appNameMatch == true) then
+#			_log("hasRule() appname match!: #{$R_APPNAME[appID]}")
+
 			# app found
 			0.upto($R_TRUST[appID].size() - 1){ |i|
 			
